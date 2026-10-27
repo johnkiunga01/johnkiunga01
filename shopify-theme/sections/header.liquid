@@ -1,0 +1,63 @@
+<header class="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16 md:h-20 gap-4">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 shrink-0">
+        <div class="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
+          <span class="text-lg md:text-xl font-black">N</span>
+        </div>
+        <span class="text-lg md:text-xl font-black text-secondary tracking-tighter hidden sm:block">NAIROMARKET</span>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="flex-1 max-w-2xl hidden md:block">
+        <form action="/search" method="get" class="relative group">
+          <input 
+            type="text" 
+            name="q"
+            placeholder="Search for products, brands and categories" 
+            class="w-full pl-12 pr-4 py-2.5 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-primary focus:ring-0 transition-all text-sm font-medium"
+          />
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </form>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 md:gap-4">
+        <a href="/account" class="p-2 text-secondary hover:bg-slate-50 rounded-xl transition-colors hidden sm:flex items-center gap-2">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          <span class="text-xs font-bold uppercase tracking-wider hidden lg:block">Account</span>
+        </a>
+        
+        <a href="/cart" class="p-2 text-secondary hover:bg-slate-50 rounded-xl transition-colors relative flex items-center gap-2">
+          <div class="relative">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span class="absolute -top-1 -right-1 bg-primary text-white text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">
+              {{ cart.item_count }}
+            </span>
+          </div>
+          <span class="text-xs font-bold uppercase tracking-wider hidden lg:block">Cart</span>
+        </a>
+
+        <button class="md:hidden p-2 text-secondary hover:bg-slate-50 rounded-xl">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}

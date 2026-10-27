@@ -1,0 +1,64 @@
+{% section 'hero-carousel' %}
+
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-12">
+  <!-- Flash Sales Section -->
+  {% section 'flash-sales' %}
+
+  <!-- Categories Grid -->
+  <section>
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-xl md:text-2xl font-black text-secondary uppercase tracking-tight">Shop by Category</h2>
+      <a href="/collections" class="text-primary font-bold text-sm hover:underline">VIEW ALL</a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      {% for collection in collections limit: 6 %}
+        <a href="{{ collection.url }}" class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:border-primary transition-all text-center group">
+          <div class="w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-light transition-colors">
+            {% if collection.image %}
+              <img src="{{ collection.image | image_url: width: 100 }}" alt="{{ collection.title }}" class="w-6 h-6 object-contain">
+            {% else %}
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            {% endif %}
+          </div>
+          <span class="text-sm font-bold text-secondary group-hover:text-primary transition-colors">{{ collection.title }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section>
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-xl md:text-2xl font-black text-secondary uppercase tracking-tight">Trending Now</h2>
+      <a href="/collections/all" class="text-primary font-bold text-sm hover:underline">SEE ALL →</a>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      {% for product in collections.all.products limit: 10 %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Promo Banner -->
+  <div class="bg-secondary rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden relative">
+    <div class="relative z-10">
+      <span class="bg-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase mb-4 inline-block">Limited Offer</span>
+      <h2 class="text-2xl md:text-4xl font-black text-white mb-4 leading-tight">
+        UP TO 50% OFF ON <br> SMART HOME APPLIANCES
+      </h2>
+      <a href="/collections/home-appliances" class="inline-block bg-white text-secondary hover:bg-primary hover:text-white transition-all font-black px-8 py-3 rounded-xl text-sm">
+        SHOP NOW
+      </a>
+    </div>
+    <div class="text-[150px] opacity-10 absolute -right-10 -bottom-10 select-none pointer-events-none">
+      🏠
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Homepage",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,31 @@
+<div class="relative h-[300px] md:h-[450px] bg-secondary overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-r from-secondary to-transparent z-10"></div>
+  
+  <div class="max-w-7xl mx-auto px-4 h-full flex items-center relative z-20">
+    <div class="max-w-xl">
+      <span class="bg-primary text-white text-[10px] font-black px-3 py-1 rounded-full uppercase mb-4 inline-block">New Arrival</span>
+      <h1 class="text-3xl md:text-6xl font-black text-white mb-4 leading-tight uppercase tracking-tighter">
+        Premium <br> Tech Gear
+      </h1>
+      <p class="text-white/60 text-sm md:text-lg mb-8 max-w-md">
+        Discover the latest in high-performance electronics and accessories at NairoMarket.
+      </p>
+      <div class="flex gap-4">
+        <a href="/collections/all" class="bg-primary hover:bg-primary-dark text-white font-black px-8 py-4 rounded-xl text-sm transition-all shadow-xl shadow-primary/20">
+          SHOP THE COLLECTION
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute right-0 top-0 h-full w-1/2 hidden md:block">
+    <img src="https://picsum.photos/seed/tech/1200/800" class="w-full h-full object-cover opacity-50" alt="Hero Image">
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero Carousel",
+  "settings": []
+}
+{% endschema %}

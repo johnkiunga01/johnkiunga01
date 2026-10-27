@@ -1,0 +1,69 @@
+<footer class="bg-secondary text-white pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+      <div class="space-y-6">
+        <a href="/" class="flex items-center gap-2">
+          <div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+            <span class="text-xl font-black">N</span>
+          </div>
+          <span class="text-xl font-black tracking-tighter uppercase">NAIROMARKET</span>
+        </a>
+        <p class="text-gray-400 text-sm leading-relaxed">
+          NairoMarket is Kenya's premier multi-vendor marketplace, bringing you the best products from trusted vendors across the country.
+        </p>
+        <div class="flex gap-4">
+          <!-- Social Icons Placeholder -->
+          {% for i in (1..4) %}
+            <div class="w-8 h-8 bg-white/5 rounded-lg flex items-center justify-center hover:bg-primary transition-colors cursor-pointer">
+              <div class="w-4 h-4 bg-white/20 rounded-full"></div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-black uppercase tracking-widest mb-6">Shop</h3>
+        <ul class="space-y-4 text-sm text-gray-400">
+          <li><a href="/collections/all" class="hover:text-primary transition-colors">All Products</a></li>
+          <li><a href="/collections" class="hover:text-primary transition-colors">Categories</a></li>
+          <li><a href="/collections/flash-sales" class="hover:text-primary transition-colors">Flash Sales</a></li>
+          <li><a href="/pages/vendors" class="hover:text-primary transition-colors">Our Vendors</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-black uppercase tracking-widest mb-6">Support</h3>
+        <ul class="space-y-4 text-sm text-gray-400">
+          <li><a href="/pages/contact" class="hover:text-primary transition-colors">Contact Us</a></li>
+          <li><a href="/pages/shipping" class="hover:text-primary transition-colors">Shipping Policy</a></li>
+          <li><a href="/pages/returns" class="hover:text-primary transition-colors">Returns & Refunds</a></li>
+          <li><a href="/pages/faq" class="hover:text-primary transition-colors">FAQs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-black uppercase tracking-widest mb-6">Newsletter</h3>
+        <p class="text-sm text-gray-400 mb-4">Subscribe to get special offers and once-in-a-lifetime deals.</p>
+        <form action="/contact#contact_form" method="post" class="flex gap-2">
+          <input type="email" placeholder="Your email" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-sm focus:border-primary focus:ring-0 outline-none">
+          <button type="submit" class="bg-primary hover:bg-primary-dark px-4 py-2 rounded-lg font-bold text-sm transition-all">JOIN</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">
+      <p>&copy; {{ 'now' | date: "%Y" }} NairoMarket. All Rights Reserved.</p>
+      <div class="flex gap-6">
+        <a href="/pages/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="/pages/terms" class="hover:text-white transition-colors">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": []
+}
+{% endschema %}

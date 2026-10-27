@@ -1,0 +1,114 @@
+<div class="max-w-7xl mx-auto px-4 py-8">
+  <!-- Breadcrumbs -->
+  <nav class="flex items-center gap-2 text-xs text-gray-500 mb-6 overflow-x-auto whitespace-nowrap pb-2">
+    <a href="/" class="hover:text-primary transition-colors">Home</a>
+    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+    <span class="text-secondary font-bold truncate">{{ collection.title }}</span>
+  </nav>
+
+  <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Sidebar Filters (Desktop) -->
+    <aside class="hidden lg:block w-64 shrink-0">
+      <div class="sticky top-24 space-y-8">
+        <div>
+          <h3 class="text-sm font-black text-secondary uppercase tracking-wider mb-4">Categories</h3>
+          <ul class="space-y-2">
+            {% for collection_link in collections %}
+              <li>
+                <a href="{{ collection_link.url }}" class="text-sm {% if collection_link.handle == collection.handle %}text-primary font-bold{% else %}text-gray-600 hover:text-primary{% endif %} transition-colors">
+                  {{ collection_link.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-black text-secondary uppercase tracking-wider mb-4">Sort By</h3>
+          <select id="sort-by" class="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:border-primary focus:ring-0 outline-none">
+            {% for option in collection.sort_options %}
+              <option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %}>
+                {{ option.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Product Grid -->
+    <div class="flex-1">
+      <div class="flex items-center justify-between mb-8">
+        <h1 class="text-xl md:text-2xl font-black text-secondary uppercase tracking-tight">{{ collection.title }}</h1>
+        <span class="text-xs font-bold text-gray-400 uppercase tracking-widest">{{ collection.products_count }} Products</span>
+      </div>
+
+      {% paginate collection.products by 20 %}
+        {% if collection.products.size > 0 %}
+          <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            {% for product in collection.products %}
+              {% render 'product-card', product: product %}
+            {% endfor %}
+          </div>
+
+          {% if paginate.pages > 1 %}
+            <div class="mt-12 flex justify-center gap-2">
+              {{ paginate | default_pagination: next: 'Next', previous: 'Prev' }}
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="text-center py-20 bg-white rounded-2xl border-2 border-dashed border-gray-100">
+            <svg class="w-12 h-12 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <h3 class="text-lg font-bold text-secondary mb-2">No products found</h3>
+            <p class="text-gray-500">Try adjusting your filters or browse other categories.</p>
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+<script>
+  Shopify.queryParams = {};
+
+  // Preserve existing query parameters
+  if (location.search.length) {
+    var params = location.search.substring(1).split('&');
+    for (var i = 0; i < params.length; i++) {
+      var keyValue = params[i].split('=');
+      if (keyValue.length) {
+        Shopify.queryParams[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1]);
+      }
+    }
+  }
+
+  // Update sort_by parameter and reload page
+  document.querySelector('#sort-by').addEventListener('change', function(e) {
+    Shopify.queryParams.sort_by = e.target.value;
+    location.search = new URLSearchParams(Shopify.queryParams).toString();
+  });
+</script>
+
+<style>
+  .pagination {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .pagination span, .pagination a {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s;
+  }
+  .pagination .current {
+    background-color: #FF4D00;
+    color: white;
+    border-color: #FF4D00;
+  }
+  .pagination a:hover {
+    border-color: #FF4D00;
+    color: #FF4D00;
+  }
+</style>

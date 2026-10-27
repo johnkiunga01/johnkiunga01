@@ -1,0 +1,44 @@
+<div class="max-w-4xl mx-auto px-4 py-12">
+  <h1 class="text-2xl font-black text-secondary uppercase mb-8">Your Cart</h1>
+  
+  {% if cart.item_count > 0 %}
+    <form action="/cart" method="post" novalidate>
+      <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        {% for item in cart.items %}
+          <div class="flex items-center gap-4 p-6 border-b last:border-0">
+            <div class="w-20 h-20 bg-slate-50 rounded-lg overflow-hidden shrink-0">
+              <img src="{{ item.image | image_url: width: 200 }}" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1">
+              <h3 class="font-bold text-secondary">{{ item.product.title }}</h3>
+              <p class="text-xs text-gray-500">{{ item.variant.title }}</p>
+              <p class="text-primary font-bold mt-1">{{ item.price | money }}</p>
+            </div>
+            <div class="flex items-center gap-4">
+              <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" class="w-12 text-center border rounded p-1">
+              <a href="{{ item.url_to_remove }}" class="text-red-500 hover:text-red-700">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div class="mt-8 flex flex-col items-end gap-4">
+        <div class="text-right">
+          <p class="text-gray-500 text-sm uppercase font-bold">Total</p>
+          <p class="text-3xl font-black text-primary">{{ cart.total_price | money }}</p>
+        </div>
+        <div class="flex gap-4">
+          <button type="submit" name="update" class="px-6 py-3 border-2 border-gray-200 rounded-xl font-bold hover:bg-gray-50 transition-all">UPDATE CART</button>
+          <button type="submit" name="checkout" class="px-12 py-3 bg-primary text-white rounded-xl font-black hover:bg-primary-dark transition-all shadow-lg shadow-primary/20">CHECKOUT</button>
+        </div>
+      </div>
+    </form>
+  {% else %}
+    <div class="text-center py-20 bg-white rounded-2xl border-2 border-dashed border-gray-100">
+      <p class="text-gray-500 mb-8">Your cart is currently empty.</p>
+      <a href="/" class="inline-block bg-primary text-white px-8 py-3 rounded-xl font-black">START SHOPPING</a>
+    </div>
+  {% endif %}
+</div>
