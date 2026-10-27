@@ -1,0 +1,50 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.email == 'jkyunger@gmail.com' && request.auth.token.email_verified == true;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // User Settings Validation
+    function isValidUserSettings(data) {
+      return data.keys().hasAll(['linkedin_connected']) &&
+             data.linkedin_connected is bool &&
+             (data.get('linkedin_token', '') is string) &&
+             (data.get('hunter_api_key', '') is string);
+    }
+
+    // Settings collection
+    match /user_settings/{userId} {
+      allow get: if isOwner(userId);
+      allow write: if isOwner(userId) && isValidUserSettings(request.resource.data);
+    }
+
+    // Leads collection
+    match /leads/{leadId} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.owner_id == request.auth.uid);
+      allow write: if (isAdmin() || (isSignedIn() && request.resource.data.owner_id == request.auth.uid)) && isValidId(leadId);
+      
+      match /interactions/{interactionId} {
+        allow read, write: if isAdmin() || (isSignedIn() && get(/databases/$(database)/documents/leads/$(leadId)).data.owner_id == request.auth.uid);
+      }
+    }
+  }
+}
