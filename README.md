@@ -110,7 +110,7 @@ Right now I'm working on product architecture, the design system, and AI integra
 I'm open to **product engineering roles, SaaS builds, and AI automation projects**, especially with teams building for African markets.
 
 - 📧 **Email:** [johnkiunga01@gmail.com](mailto:johnkiunga01@gmail.com)
-- 📱 **Phone / WhatsApp:** [+254 702 100 880](https://wa.me/254702100880)
+- 💬 **WhatsApp:** [Chat with me](https://wa.me/254702100880)
 - 🌐 **Website:** [johnkiunga.co.ke](https://johnkiunga.co.ke)
 - 💼 **LinkedIn:** [in/johnkiunga](https://www.linkedin.com/in/johnkiunga)
 
